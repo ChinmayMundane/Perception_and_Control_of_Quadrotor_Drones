@@ -87,13 +87,13 @@ noetic
 
 ## 3. Download the project
 
-Create the Catkin workspace, then clone the course repository into its `src`
-directory. Replace `<repository-url>` with the URL supplied by the instructor:
+Create the Catkin workspace, then clone this repository into its `src`
+directory:
 
 ```bash
 mkdir -p ~/bepop_ws
 cd ~/bepop_ws
-git clone <repository-url> src
+git clone https://github.com/ChinmayMundane/Perception_and_Control_of_Quadrotor_Drones.git src
 ```
 
 The repository should now be located at `~/bepop_ws/src`. All simulator
