@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <!--
+    The stock Jackal launch uses global robot_description, base_link and
+    controller-manager names.  This wrapper gives every Jackal resource a
+    distinct name so it can safely share one ROS master with the Bebop.
+  -->
+  <arg name="namespace" default="jackal"/>
+  <arg name="name" default="jackal"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.02"/>
+  <arg name="yaw" default="0.0"/>
+
+  <group ns="$(arg namespace)">
+    <param name="robot_description"
+           command="$(find xacro)/xacro '$(find bebop_jackal_sim)/urdf/jackal_namespaced.urdf.xacro' robot_namespace:=$(arg namespace)"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+          name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" value="30.0"/>
+    </node>
+
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_model"
+          args="-urdf -param /$(arg namespace)/robot_description
+                -model $(arg name)
+                -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)"
+          output="screen"/>
+  </group>
+</launch>

@@ -1,0 +1,15 @@
+# Catkin workspace output
+build/
+devel/
+install/
+logs/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+*~

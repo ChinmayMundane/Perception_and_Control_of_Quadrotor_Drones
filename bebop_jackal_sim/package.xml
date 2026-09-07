@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>bebop_jackal_sim</name>
+  <version>0.1.0</version>
+  <description>A classroom Gazebo world containing a Bebop quadrotor and a namespaced Jackal ground robot.</description>
+
+  <maintainer email="arcane@todo.todo">Arcane</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>bebop_gazebo</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>jackal_description</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <export/>
+</package>

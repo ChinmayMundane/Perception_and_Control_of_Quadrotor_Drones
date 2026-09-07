@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="bebop_pid_controller" type="pid_template.py"
+        name="pid_template" output="screen" required="true"/>
+</launch>

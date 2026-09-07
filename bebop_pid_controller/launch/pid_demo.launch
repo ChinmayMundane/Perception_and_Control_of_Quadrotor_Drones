@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="rviz" default="true"/>
+
+  <include file="$(find bebop_gazebo)/launch/bebop_empty_world.launch">
+    <arg name="rviz" value="$(arg rviz)"/>
+  </include>
+
+  <include file="$(find bebop_pid_controller)/launch/pid_controller.launch"/>
+</launch>

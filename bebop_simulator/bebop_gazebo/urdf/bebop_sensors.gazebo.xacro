@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Quadrotor Sensor Plugins -->
+  <xacro:macro name="bebop_sensors">
+
+    <gazebo reference="camera_base_link">
+      <sensor type="camera" name="bebop_camera_sensor">
+        <update_rate>30.0</update_rate>
+        <camera name="front">
+          <horizontal_fov>1.570796</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name="bebop_camera_controller" filename="libgazebo_ros_camera.so">
+        <cameraName>/bebop/camera</cameraName>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <imageTopicName>/bebop/image_raw</imageTopicName>
+          <cameraInfoTopicName>/bebop/camera_info</cameraInfoTopicName>
+          <frameName>camera_optical</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+        <gazebo>
+          <plugin name="bebop_gps_sim" filename="libhector_gazebo_ros_gps.so">
+            <updateRate>4.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <frameId>$(arg base_link_frame)</frameId>
+            <topicName>/bebop/fix</topicName>
+            <velocityTopicName>/bebop/fix_velocity</velocityTopicName>
+            <referenceLatitude>37.9707</referenceLatitude>
+            <referenceLongitude>23.7294</referenceLongitude>
+            <drift>5.0 5.0 5.0</drift>
+            <gaussianNoise>0.01 0.01 0.01</gaussianNoise>
+            <velocityDrift>0 0 0</velocityDrift>
+            <velocityGaussianNoise>0.05 0.05 0.05</velocityGaussianNoise>
+          </plugin>
+
+          <plugin name="bebop_groundtruth_sim" filename="libgazebo_ros_p3d.so">
+            <updateRate>100.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>/bebop/odom</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <frameName>$(arg world_frame)</frameName>
+          </plugin>
+        </gazebo>
+
+    <gazebo reference="sensor_laser">
+      <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/bebop/laser_scan</topicName>
+        <frameName>sensor_laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  </xacro:macro>
+
+</robot>

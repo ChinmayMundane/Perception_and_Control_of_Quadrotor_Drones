@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="rviz_config" default="$(find bebop_gazebo)/rviz/bebop.rviz"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch" />
+
+  <node pkg="bebop_gazebo" type="pcd_transform.py" name="pcd_tf_py"
+        required="true" output="screen" if="$(arg rviz)"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"
+        args="-d $(arg rviz_config)" if="$(arg rviz)"/>
+</launch>

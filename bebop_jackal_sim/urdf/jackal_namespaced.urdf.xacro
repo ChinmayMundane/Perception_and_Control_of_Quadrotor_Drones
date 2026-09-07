@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<robot name="jackal" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_namespace" default="jackal"/>
+
+  <xacro:property name="jackal_pi" value="3.1415926535897931"/>
+  <xacro:property name="wheelbase" value="0.262"/>
+  <xacro:property name="track" value="0.37559"/>
+  <xacro:property name="wheel_vertical_offset" value="0.0345"/>
+  <xacro:property name="wheel_radius" value="0.098"/>
+  <xacro:property name="wheel_width" value="0.040"/>
+  <!-- Shift the stock geometry so jackal_base_link lies on the ground plane. -->
+  <xacro:property name="ground_offset" value="${wheel_radius - wheel_vertical_offset}"/>
+
+  <material name="jackal_dark_grey">
+    <color rgba="0.20 0.20 0.20 1.0"/>
+  </material>
+  <material name="jackal_yellow">
+    <color rgba="0.90 0.72 0.00 1.0"/>
+  </material>
+  <material name="jackal_black">
+    <color rgba="0.05 0.05 0.05 1.0"/>
+  </material>
+
+  <link name="jackal_base_link"/>
+
+  <joint name="jackal_base_to_chassis" type="fixed">
+    <parent link="jackal_base_link"/>
+    <child link="jackal_chassis_link"/>
+  </joint>
+
+  <link name="jackal_chassis_link">
+    <visual name="base_visual">
+      <origin xyz="0 0 ${-0.0655 + ground_offset}" rpy="${jackal_pi/2} 0 ${jackal_pi/2}"/>
+      <geometry>
+        <mesh filename="package://jackal_description/meshes/jackal-base.stl"/>
+      </geometry>
+      <material name="jackal_dark_grey"/>
+    </visual>
+    <visual name="front_fender_visual">
+      <origin xyz="0 0 ${ground_offset}"/>
+      <geometry>
+        <mesh filename="package://jackal_description/meshes/jackal-fender.stl"/>
+      </geometry>
+      <material name="jackal_yellow"/>
+    </visual>
+    <visual name="rear_fender_visual">
+      <origin xyz="0 0 ${ground_offset}" rpy="0 0 ${jackal_pi}"/>
+      <geometry>
+        <mesh filename="package://jackal_description/meshes/jackal-fender.stl"/>
+      </geometry>
+      <material name="jackal_yellow"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${0.092 + ground_offset}"/>
+      <geometry>
+        <box size="0.420 0.310 0.184"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.012 0.002 ${0.067 + ground_offset}"/>
+      <mass value="16.523"/>
+      <inertia ixx="0.3136" ixy="-0.0008" ixz="0.0164"
+               iyy="0.3922" iyz="-0.0009" izz="0.4485"/>
+    </inertial>
+  </link>
+
+  <xacro:macro name="jackal_wheel" params="prefix x y">
+    <link name="jackal_${prefix}_wheel_link">
+      <visual>
+        <origin rpy="${jackal_pi/2} 0 0"/>
+        <geometry>
+          <mesh filename="package://jackal_description/meshes/jackal-wheel.stl"/>
+        </geometry>
+        <material name="jackal_black"/>
+      </visual>
+      <collision>
+        <origin rpy="${jackal_pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.477"/>
+        <inertia ixx="0.0013" ixy="0" ixz="0"
+                 iyy="0.0024" iyz="0" izz="0.0013"/>
+      </inertial>
+    </link>
+
+    <joint name="jackal_${prefix}_wheel_joint" type="continuous">
+      <origin xyz="${x} ${y} ${wheel_vertical_offset + ground_offset}"/>
+      <parent link="jackal_chassis_link"/>
+      <child link="jackal_${prefix}_wheel_link"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="0.1" friction="0.0"/>
+    </joint>
+
+    <gazebo reference="jackal_${prefix}_wheel_link">
+      <material>Gazebo/DarkGrey</material>
+      <selfCollide>false</selfCollide>
+      <mu1>0.8</mu1>
+      <mu2>0.8</mu2>
+      <kp>1000000.0</kp>
+      <kd>1.0</kd>
+      <fdir1>1 0 0</fdir1>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:jackal_wheel prefix="front_left"  x="${ wheelbase/2}" y="${ track/2}"/>
+  <xacro:jackal_wheel prefix="front_right" x="${ wheelbase/2}" y="${-track/2}"/>
+  <xacro:jackal_wheel prefix="rear_left"   x="${-wheelbase/2}" y="${ track/2}"/>
+  <xacro:jackal_wheel prefix="rear_right"  x="${-wheelbase/2}" y="${-track/2}"/>
+
+  <gazebo reference="jackal_chassis_link">
+    <material>Gazebo/Grey</material>
+    <selfCollide>false</selfCollide>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="jackal_skid_steer" filename="libgazebo_ros_skid_steer_drive.so">
+      <robotNamespace>/$(arg robot_namespace)</robotNamespace>
+      <updateRate>50.0</updateRate>
+      <leftFrontJoint>jackal_front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>jackal_front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>jackal_rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>jackal_rear_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>${track}</wheelSeparation>
+      <wheelDiameter>${2 * wheel_radius}</wheelDiameter>
+      <torque>20.0</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>jackal_base_link</robotBaseFrame>
+      <broadcastTF>true</broadcastTF>
+    </plugin>
+
+    <plugin name="jackal_joint_states" filename="libgazebo_ros_joint_state_publisher.so">
+      <robotNamespace>/$(arg robot_namespace)</robotNamespace>
+      <updateRate>30.0</updateRate>
+      <jointName>jackal_front_left_wheel_joint,jackal_front_right_wheel_joint,jackal_rear_left_wheel_joint,jackal_rear_right_wheel_joint</jointName>
+    </plugin>
+  </gazebo>
+</robot>

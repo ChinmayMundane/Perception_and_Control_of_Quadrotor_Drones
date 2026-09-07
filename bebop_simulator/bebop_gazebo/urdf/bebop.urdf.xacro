@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+
+<robot
+  name="quadrotor"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find bebop_gazebo)/urdf/bebop_base.urdf.xacro" />
+    <xacro:bebop_base_macro />
+
+    <xacro:arg name="gpu" default="false"/>
+    <xacro:property name="gpu" value="$(arg gpu)" />
+    <xacro:arg name="organize_cloud" default="false"/>
+    <xacro:property name="organize_cloud" value="$(arg organize_cloud)" />
+
+    <xacro:property name="laser_size_x" value="0.03"/>
+    <xacro:property name="laser_size_y" value="0.03"/>
+    <xacro:property name="laser_size_z" value="0.04"/>
+    <xacro:property name="laser_origin_x" value="0.0"/>
+    <xacro:property name="laser_origin_y" value="0"/>
+    <xacro:property name="laser_origin_z" value="0.08"/>
+
+  <xacro:property name="base_radius" value="0.05"/>
+  <xacro:property name="base_height" value="0.05"/>
+  <xacro:property name="laz_radius" value="0.04"/>
+  <xacro:property name="laz_height" value="0.1"/>
+  
+  <!--Laser Scan-->
+  <!-- <link name="sensor_laser">
+    <visual>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/hokuyo.dae"/> -->
+        <!--box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/-->
+      <!-- </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.00000000001"/>
+      <inertia ixx="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" ixy="0" ixz="0" iyy="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" iyz="0" izz="${(1/2) * 0.1 * base_radius * base_radius}"/>
+    </inertial>
+  </link>
+
+  <joint name="sensor_laser_joint" type="fixed">
+    <origin xyz="${laser_origin_x} ${laser_origin_y} ${laser_origin_z}" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="sensor_laser" />
+  </joint> -->
+  
+  <!-- >>> DEPTH CAMERA >>> -->
+  <joint name="depthcamera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="depthcamera_link"/>
+    <origin xyz="0.1 0 0.0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="depthcamera_link">
+    <visual>
+        <geometry>
+            <box size="0.010 0.01 0.01"/>
+        </geometry>
+        <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="depthcamera_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+    <parent link="depthcamera_link" />
+    <child link="depthcamera_link_optical" />
+  </joint>
+
+  <link name="depthcamera_link_optical"></link>
+
+  <gazebo reference="depthcamera_link">
+    <material>Gazebo/Red</material>
+  
+    <sensor name="camera" type="depth">
+      <pose> 0 0 0 0 0 0 </pose>
+      <visualize>false</visualize>
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.570796</horizontal_fov>
+        <image>
+          <format>R8G8B8</format>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>100</far>
+        </clip>
+      </camera>
+  
+      <!-- THIS PLUGIN DOESN'T WORK FOR DEPTH CAMERA
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <frame_name>depthcamera_link_optical</frame_name>
+          <min_depth>0.001</min_depth>
+          <max_depth>100</max_depth>
+        </plugin> -->
+
+        <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+          <baseline>0.2</baseline>
+          <alwaysOn>true</alwaysOn>
+          <!-- Keep this zero, update_rate in the parent <sensor> tag
+            will control the frame rate. -->
+          <updateRate>0.0</updateRate>
+          <cameraName>camera_ir</cameraName>
+          <imageTopicName>/camera/color/image_raw</imageTopicName>
+          <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+          <frameName>depthcamera_link_optical</frameName>
+          <pointCloudCutoff>0.01</pointCloudCutoff>
+          <pointCloudCutoffMax>10.0</pointCloudCutoffMax>
+          <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline>
+        </plugin>
+
+  </sensor>
+  </gazebo>
+  
+  <!-- <<< DEPTH CAMERA <<< -->
+
+   <gazebo reference="base_link">
+    <sensor name='collision_sensor' type='contact'>
+      <contact>
+        <collision>base_link_collision</collision>
+      </contact>
+      <plugin name="collision_sensor" filename="libgazebo_collision_sensor.so">
+        <rosDebugLevel>na</rosDebugLevel>
+        <topicName>/bebop/base_collision</topicName>
+        <updateRate>10.0</updateRate>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+  <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+  <xacro:VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" organize_cloud="${organize_cloud}" hz="10" samples="440" gpu="${gpu}">
+    <origin xyz="0 0 0.06" rpy="0 0 0" />
+  </xacro:VLP-16>
+
+
+</robot>
