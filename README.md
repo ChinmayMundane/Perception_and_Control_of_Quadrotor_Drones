@@ -106,11 +106,17 @@ Continue with the dependency installation and build steps below from
 
 ## 4. Install project dependencies
 
-Install Open3D for the CBF example:
+Install Open3D with Ubuntu 20.04's system Python 3.8:
 
 ```bash
-python3 -m pip install --user open3d==0.18.0
+/usr/bin/python3.8 -m pip install --user --upgrade "pip>=20.3,<25.1"
+/usr/bin/python3.8 -m pip install --user "numpy<2.0" "open3d==0.18.0"
+/usr/bin/python3.8 -c "import open3d as o3d; print(o3d.__version__)"
 ```
+
+The final command should print `0.18.0`. Use `/usr/bin/python3.8` exactly as
+shown. A Conda environment or another Python installation can make the plain
+`python3` command select an unsupported Python version.
 
 ```bash
 cd ~/bepop_ws
@@ -303,6 +309,32 @@ sudo apt update
 sudo apt install ros-noetic-jackal-description
 source /opt/ros/noetic/setup.bash
 source ~/bepop_ws/devel/setup.bash
+```
+
+### Open3D version error or `No matching distribution found`
+
+Check which Python is selected:
+
+```bash
+command -v python3
+python3 --version
+/usr/bin/python3.8 --version
+```
+
+For Ubuntu 20.04 and ROS Noetic, install and test Open3D using the system
+Python rather than a Conda Python:
+
+```bash
+/usr/bin/python3.8 -m pip install --user --upgrade "pip>=20.3,<25.1"
+/usr/bin/python3.8 -m pip install --user "numpy<2.0" "open3d==0.18.0"
+/usr/bin/python3.8 -c "import open3d as o3d; print(o3d.__version__)"
+```
+
+If `/usr/bin/python3.8 -m pip` is unavailable, install it first:
+
+```bash
+sudo apt update
+sudo apt install python3-pip
 ```
 
 ### Gazebo opens with a black window or crashes
