@@ -57,6 +57,7 @@ sudo apt install -y \
   python3-pip \
   python3-rosdep \
   python3-scipy \
+  python3-pykdl \
   ros-noetic-gazebo-ros-pkgs \
   ros-noetic-hector-gazebo-plugins \
   ros-noetic-jackal-description \
