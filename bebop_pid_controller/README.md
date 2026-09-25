@@ -1,37 +1,40 @@
-# Bebop PID Controller Tutorial
+# Bebop PID Controller Reference
 
-This package provides one PID exercise script. The ROS and simulation template is already given, and students implement the PID calculation in:
+This package shows how a PID position controller is implemented for the
+simulated Bebop. You can use this code as a reference for the assignment.
+
+The reference controller is in:
 
 ```text
 scripts/pid_template.py
 ```
 
-The provided code already handles:
+The provided code handles:
 
 - Bebop odometry;
 - goals selected in RViz;
 - automatic takeoff;
 - stopping PID control when a landing message is received;
 - conversion from world coordinates to the Bebop body frame;
-- simple velocity limits and goal tolerance; and
-- publishing velocity commands to the simulator.
+- simple velocity limits and goal tolerance;
+- publishing velocity commands to the simulator; and
+- the proportional, integral, and derivative calculation.
 
-The starter `PidAxis.update()` method returns zero. Therefore, the unmodified
-template will receive RViz goals but will not move the Bebop toward them.
+## What the reference code demonstrates
 
-## PID implementation task
+The `PidAxis.update()` method shows how to:
 
-Complete the PID implementation inside `PidAxis.update()`:
+- calculate the proportional term from the current error;
+- accumulate the integral term over time;
+- limit the accumulated integral to reduce integral windup;
+- calculate the derivative from the current and previous errors; and
+- combine the three terms into one controller output.
 
-Yaw is not controlled in this exercise. The template only reads the current
-yaw to transform the global X/Y PID outputs into the Bebop's local body frame.
-A yaw controller can therefore be added later without changing the X/Y/Z PID
-implementation.
+The same `PidAxis` class is used independently for the global X, global Y,
+and altitude errors. You can use this implementation as a reference for the
+assignment.
 
-Do not run keyboard teleoperation while the PID controller is active. Both
-programs publish commands to the Bebop.
-
-## Build and test
+## Run the reference controller
 
 First build and source the workspace as described in the
 [main README](../README.md). Then run:
@@ -40,7 +43,7 @@ First build and source the workspace as described in the
 roslaunch bebop_pid_controller pid_demo.launch
 ```
 
-This command starts Gazebo, RViz, the Bebop, and the student controller. The
+This command starts Gazebo, RViz, the Bebop, and the reference controller. The
 Bebop automatically takes off and then waits for a goal.
 
 Wait until the Bebop has reached its takeoff height before selecting a goal.

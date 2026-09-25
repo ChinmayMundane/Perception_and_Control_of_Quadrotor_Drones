@@ -1,0 +1,2188 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+  
+
+  
+
+    
+
+    <model name="sphere_0">
+    <static>1</static>
+    <pose> -22 21 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>6304.0448422390255</mass>
+          <inertia>
+            <ixx>15370.915721975478</ixx>
+            <iyy>15370.915721975478</iyy>
+            <izz>15370.915721975478</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.4689382506158353</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.4689382506158353</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_1">
+    <static>1</static>
+    <pose> -10 8 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>3614.959449074988</mass>
+          <inertia>
+            <ixx>6083.777210590986</ixx>
+            <iyy>6083.777210590986</iyy>
+            <izz>6083.777210590986</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.0511855114692956</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.0511855114692956</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_2">
+    <static>1</static>
+    <pose> -24 19 9 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>300.7701537424715</mass>
+          <inertia>
+            <ixx>96.4699710384999</ixx>
+            <iyy>96.4699710384999</iyy>
+            <izz>96.4699710384999</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.8954651933009904</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.8954651933009904</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_3">
+    <static>1</static>
+    <pose> 4 22 3 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>2735.4676839567533</mass>
+          <inertia>
+            <ixx>3822.846846027961</ixx>
+            <iyy>3822.846846027961</iyy>
+            <izz>3822.846846027961</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.8691650836914253</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.8691650836914253</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_4">
+    <static>1</static>
+    <pose> -1 10 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>17433.930374516916</mass>
+          <inertia>
+            <ixx>83751.59702305541</ixx>
+            <iyy>83751.59702305541</iyy>
+            <izz>83751.59702305541</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.465523907972898</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.465523907972898</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_5">
+    <static>1</static>
+    <pose> -16 -7 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>3274.2479315338796</mass>
+          <inertia>
+            <ixx>5158.461436122134</ixx>
+            <iyy>5158.461436122134</iyy>
+            <izz>5158.461436122134</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.9846060799562095</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.9846060799562095</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_6">
+    <static>1</static>
+    <pose> -17 12 0 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>6357.63986233508</mass>
+          <inertia>
+            <ixx>15589.330230670672</ixx>
+            <iyy>15589.330230670672</iyy>
+            <izz>15589.330230670672</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.475915229713791</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.475915229713791</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_7">
+    <static>1</static>
+    <pose> -19 -10 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1644.8838253907272</mass>
+          <inertia>
+            <ixx>1637.6696551442724</ixx>
+            <iyy>1637.6696551442724</iyy>
+            <izz>1637.6696551442724</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.577667722013219</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.577667722013219</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_8">
+    <static>1</static>
+    <pose> -9 2 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>7637.3046018213645</mass>
+          <inertia>
+            <ixx>21162.53902361407</ixx>
+            <iyy>21162.53902361407</iyy>
+            <izz>21162.53902361407</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.631987572097781</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.631987572097781</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_9">
+    <static>1</static>
+    <pose> -9 19 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>17162.8728969387</mass>
+          <inertia>
+            <ixx>81592.62312962052</ixx>
+            <iyy>81592.62312962052</iyy>
+            <izz>81592.62312962052</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.4474697091574025</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.4474697091574025</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_10">
+    <static>1</static>
+    <pose> 23 1 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1303.3993826508504</mass>
+          <inertia>
+            <ixx>1111.2116094128164</ixx>
+            <iyy>1111.2116094128164</iyy>
+            <izz>1111.2116094128164</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.459921935304536</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.459921935304536</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_11">
+    <static>1</static>
+    <pose> 9 -5 4 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>802.8840087335734</mass>
+          <inertia>
+            <ixx>495.55165609463813</ixx>
+            <iyy>495.55165609463813</iyy>
+            <izz>495.55165609463813</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.2421901073198702</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.2421901073198702</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_12">
+    <static>1</static>
+    <pose> 2 2 0 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>67.90683798653887</mass>
+          <inertia>
+            <ixx>8.075884502008904</ixx>
+            <iyy>8.075884502008904</iyy>
+            <izz>8.075884502008904</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.5452658513076029</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.5452658513076029</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_13">
+    <static>1</static>
+    <pose> -15 -14 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>13331.21373307514</mass>
+          <inertia>
+            <ixx>53552.99169053216</ixx>
+            <iyy>53552.99169053216</iyy>
+            <izz>53552.99169053216</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.169034938793554</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.169034938793554</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_14">
+    <static>1</static>
+    <pose> 3 2 0 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>17330.618064283466</mass>
+          <inertia>
+            <ixx>82926.05472393546</ixx>
+            <iyy>82926.05472393546</iyy>
+            <izz>82926.05472393546</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.4586648533570092</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.4586648533570092</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_15">
+    <static>1</static>
+    <pose> -22 -24 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1025.583238097477</mass>
+          <inertia>
+            <ixx>745.2221854900163</ixx>
+            <iyy>745.2221854900163</iyy>
+            <izz>745.2221854900163</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.3478061539093313</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.3478061539093313</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_16">
+    <static>1</static>
+    <pose> 1 9 9 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>6331.580114597177</mass>
+          <inertia>
+            <ixx>15482.975594072212</ixx>
+            <iyy>15482.975594072212</iyy>
+            <izz>15482.975594072212</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.4725276998307857</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.4725276998307857</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_17">
+    <static>1</static>
+    <pose> 5 -25 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>412.73709180956837</mass>
+          <inertia>
+            <ixx>163.47703466977035</ixx>
+            <iyy>163.47703466977035</iyy>
+            <izz>163.47703466977035</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.9950883233912462</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.9950883233912462</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_18">
+    <static>1</static>
+    <pose> 14 -4 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>9671.974458461413</mass>
+          <inertia>
+            <ixx>31370.840411934012</ixx>
+            <iyy>31370.840411934012</iyy>
+            <izz>31370.840411934012</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.8475772235510735</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.8475772235510735</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_19">
+    <static>1</static>
+    <pose> -7 -12 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>2288.310301973909</mass>
+          <inertia>
+            <ixx>2839.176847158699</ixx>
+            <iyy>2839.176847158699</iyy>
+            <izz>2839.176847158699</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.7612003732619348</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.7612003732619348</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_20">
+    <static>1</static>
+    <pose> -2 -1 0 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1549.3632262910603</mass>
+          <inertia>
+            <ixx>1482.2552307769074</ixx>
+            <iyy>1482.2552307769074</iyy>
+            <izz>1482.2552307769074</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.5465176405296739</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.5465176405296739</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_21">
+    <static>1</static>
+    <pose> 6 -13 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>10437.80872239945</mass>
+          <inertia>
+            <ixx>35619.116395667545</ixx>
+            <iyy>35619.116395667545</iyy>
+            <izz>35619.116395667545</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.9208342208272895</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.9208342208272895</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_22">
+    <static>1</static>
+    <pose> -2 3 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>5750.031626446294</mass>
+          <inertia>
+            <ixx>13186.148857234906</ixx>
+            <iyy>13186.148857234906</iyy>
+            <izz>13186.148857234906</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.394384402186518</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.394384402186518</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_23">
+    <static>1</static>
+    <pose> 10 -18 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>5511.783995547832</mass>
+          <inertia>
+            <ixx>12288.189519641015</ixx>
+            <iyy>12288.189519641015</iyy>
+            <izz>12288.189519641015</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.3608470950152207</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.3608470950152207</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_24">
+    <static>1</static>
+    <pose> -2 -20 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>3810.0031753762705</mass>
+          <inertia>
+            <ixx>6640.6381261397455</ixx>
+            <iyy>6640.6381261397455</iyy>
+            <izz>6640.6381261397455</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.087431547846422</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.087431547846422</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_25">
+    <static>1</static>
+    <pose> 0 18 3 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>12116.623268982588</mass>
+          <inertia>
+            <ixx>45670.62203629303</ixx>
+            <iyy>45670.62203629303</iyy>
+            <izz>45670.62203629303</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.0697122353188653</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.0697122353188653</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_26">
+    <static>1</static>
+    <pose> -11 14 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>513.7556381328399</mass>
+          <inertia>
+            <ixx>235.46620633168817</ixx>
+            <iyy>235.46620633168817</iyy>
+            <izz>235.46620633168817</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.0704243928219066</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.0704243928219066</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_27">
+    <static>1</static>
+    <pose> -9 17 2 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1101.1587865518961</mass>
+          <inertia>
+            <ixx>838.9785021657165</ixx>
+            <iyy>838.9785021657165</iyy>
+            <izz>838.9785021657165</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.3801314304795218</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.3801314304795218</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_28">
+    <static>1</static>
+    <pose> -25 23 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>9298.30319558398</mass>
+          <inertia>
+            <ixx>29376.976156946108</ixx>
+            <iyy>29376.976156946108</iyy>
+            <izz>29376.976156946108</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.8104230455707313</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.8104230455707313</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_29">
+    <static>1</static>
+    <pose> 15 -9 3 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>6913.292294427958</mass>
+          <inertia>
+            <ixx>17925.68596643845</ixx>
+            <iyy>17925.68596643845</iyy>
+            <izz>17925.68596643845</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.546041255893368</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.546041255893368</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_30">
+    <static>1</static>
+    <pose> 17 -5 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>7545.304896355475</mass>
+          <inertia>
+            <ixx>20739.370718549308</ixx>
+            <iyy>20739.370718549308</iyy>
+            <izz>20739.370718549308</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.621376458073707</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.621376458073707</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_31">
+    <static>1</static>
+    <pose> -17 7 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1342.1753182257628</mass>
+          <inertia>
+            <ixx>1166.8534968189517</ixx>
+            <iyy>1166.8534968189517</iyy>
+            <izz>1166.8534968189517</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.4742581804034165</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.4742581804034165</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_32">
+    <static>1</static>
+    <pose> 4 19 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>2131.7112121429636</mass>
+          <inertia>
+            <ixx>2522.7925175141327</ixx>
+            <iyy>2522.7925175141327</iyy>
+            <izz>2522.7925175141327</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.720071843250976</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.720071843250976</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_33">
+    <static>1</static>
+    <pose> 6 -3 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1381.8827059567348</mass>
+          <inertia>
+            <ixx>1224.9533639506901</ixx>
+            <iyy>1224.9533639506901</iyy>
+            <izz>1224.9533639506901</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.4886554468799855</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.4886554468799855</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_34">
+    <static>1</static>
+    <pose> -17 6 5 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1002.7860585996068</mass>
+          <inertia>
+            <ixx>717.8186386914875</ixx>
+            <iyy>717.8186386914875</iyy>
+            <izz>717.8186386914875</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.337744660068021</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.337744660068021</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_35">
+    <static>1</static>
+    <pose> 15 23 3 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>9246.868055774496</mass>
+          <inertia>
+            <ixx>29106.636326370346</ixx>
+            <iyy>29106.636326370346</iyy>
+            <izz>29106.636326370346</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.8052313504137434</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.8052313504137434</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_36">
+    <static>1</static>
+    <pose> 16 -15 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>166.74519186133662</mass>
+          <inertia>
+            <ixx>36.093011350849665</ixx>
+            <iyy>36.093011350849665</iyy>
+            <izz>36.093011350849665</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.735622329337597</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.735622329337597</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_37">
+    <static>1</static>
+    <pose> 14 17 9 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>8612.25120822306</mass>
+          <inertia>
+            <ixx>25854.05888983777</ixx>
+            <iyy>25854.05888983777</iyy>
+            <izz>25854.05888983777</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.739529785227139</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.739529785227139</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_38">
+    <static>1</static>
+    <pose> 16 15 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>3749.8150389199386</mass>
+          <inertia>
+            <ixx>6466.719091317763</ixx>
+            <iyy>6466.719091317763</iyy>
+            <izz>6466.719091317763</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.0763811571647377</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.0763811571647377</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_39">
+    <static>1</static>
+    <pose> 14 6 2 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>17712.873278333827</mass>
+          <inertia>
+            <ixx>85996.86336253484</ixx>
+            <iyy>85996.86336253484</iyy>
+            <izz>85996.86336253484</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>3.483908995398422</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>3.483908995398422</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_40">
+    <static>1</static>
+    <pose> -17 8 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>8580.777118286638</mass>
+          <inertia>
+            <ixx>25696.77494819666</ixx>
+            <iyy>25696.77494819666</iyy>
+            <izz>25696.77494819666</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.736188442139107</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.736188442139107</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_41">
+    <static>1</static>
+    <pose> 12 25 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>846.1875593750759</mass>
+          <inertia>
+            <ixx>540.8937690990784</ixx>
+            <iyy>540.8937690990784</iyy>
+            <izz>540.8937690990784</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.2641327290579971</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.2641327290579971</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_42">
+    <static>1</static>
+    <pose> -24 23 8 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>161.3821592761985</mass>
+          <inertia>
+            <ixx>34.17906057283528</ixx>
+            <iyy>34.17906057283528</iyy>
+            <izz>34.17906057283528</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.7276496155542503</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.7276496155542503</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_43">
+    <static>1</static>
+    <pose> 10 22 4 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>5444.342065235752</mass>
+          <inertia>
+            <ixx>12038.616825476514</ixx>
+            <iyy>12038.616825476514</iyy>
+            <izz>12038.616825476514</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.3511784808018454</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.3511784808018454</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_44">
+    <static>1</static>
+    <pose> -8 -8 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>2137.010140439859</mass>
+          <inertia>
+            <ixx>2533.2529480547037</ixx>
+            <iyy>2533.2529480547037</iyy>
+            <izz>2533.2529480547037</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.7214958941153304</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.7214958941153304</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_45">
+    <static>1</static>
+    <pose> -2 18 1 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>79.459208834573</mass>
+          <inertia>
+            <ixx>10.493200694799743</ixx>
+            <iyy>10.493200694799743</iyy>
+            <izz>10.493200694799743</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.5745818135432242</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.5745818135432242</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_46">
+    <static>1</static>
+    <pose> 21 24 2 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>476.97447704698527</mass>
+          <inertia>
+            <ixx>208.04605545106685</ixx>
+            <iyy>208.04605545106685</iyy>
+            <izz>208.04605545106685</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.0442444532173707</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.0442444532173707</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_47">
+    <static>1</static>
+    <pose> 17 15 6 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>1409.3382720866114</mass>
+          <inertia>
+            <ixx>1265.7841742018231</ixx>
+            <iyy>1265.7841742018231</iyy>
+            <izz>1265.7841742018231</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.498449848552562</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.498449848552562</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_48">
+    <static>1</static>
+    <pose> 15 -25 3 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>9585.970793321962</mass>
+          <inertia>
+            <ixx>30907.301416887014</ixx>
+            <iyy>30907.301416887014</iyy>
+            <izz>30907.301416887014</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.8391118173029875</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.8391118173029875</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_49">
+    <static>1</static>
+    <pose> 6 13 7 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>10216.906061909169</mass>
+          <inertia>
+            <ixx>34371.61345215008</ixx>
+            <iyy>34371.61345215008</iyy>
+            <izz>34371.61345215008</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>2.900081905846644</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>2.900081905846644</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+
+    
+
+    <model name="sphere_50">
+    <static>1</static>
+    <pose> -4 -14 4 0 0 0 </pose>
+      <link name="link">
+        <inertial>
+          <mass>3059.0160504680434</mass>
+          <inertia>
+            <ixx>4605.786946983831</ixx>
+            <iyy>4605.786946983831</iyy>
+            <izz>4605.786946983831</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>1.9401309722610058</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>1.9401309722610058</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+  
+  
+  </world>
+</sdf>

@@ -53,7 +53,10 @@ project:
 sudo apt install -y \
   ros-noetic-desktop-full \
   python3-catkin-tools \
+  python3-cvxopt \
+  python3-pip \
   python3-rosdep \
+  python3-scipy \
   ros-noetic-gazebo-ros-pkgs \
   ros-noetic-hector-gazebo-plugins \
   ros-noetic-jackal-description \
@@ -102,6 +105,12 @@ Continue with the dependency installation and build steps below from
 `~/bepop_ws`.
 
 ## 4. Install project dependencies
+
+Install Open3D for the CBF example:
+
+```bash
+python3 -m pip install --user open3d==0.18.0
+```
 
 ```bash
 cd ~/bepop_ws
@@ -173,7 +182,42 @@ Click this terminal before pressing the flight keys.
 For the assignment instructions, see the
 [Bebop PID controller tutorial](bebop_pid_controller/README.md).
 
-## 9. Launch the Bebop and Jackal together
+## 9. Run the CBF quadrotor navigation example
+
+The CBF example starts Gazebo, RViz, the selected world, the Bebop, its lidar,
+and the navigation controller. It then waits for the simulator and commands
+the Bebop to take off automatically.
+
+Open a sourced terminal and run:
+
+```bash
+cd ~/bepop_ws/src
+bash run_cbf_quadrotor_navigation.sh env4
+```
+
+Wait for Gazebo and RViz to finish loading and for the Bebop to take off. In
+RViz, select **2D Nav Goal** and click a destination. The controller will move
+the Bebop toward the goal while using the lidar measurements to keep a safe
+distance from the simulated obstacles.
+
+Replace `env4` with another included world name when needed:
+
+```text
+env1 through env13
+```
+
+Do not include the `.world` extension. If no world name is supplied, the
+script uses `env4`:
+
+```bash
+bash run_cbf_quadrotor_navigation.sh
+```
+
+Press `Ctrl+C` in the script terminal to stop the controller, Gazebo, and
+RViz. Do not run keyboard teleoperation at the same time because both programs
+send velocity commands to the Bebop.
+
+## 10. Launch the Bebop and Jackal together
 
 This simulation starts:
 

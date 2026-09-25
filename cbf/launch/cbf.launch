@@ -1,0 +1,6 @@
+<!--
+  cbf for parrot bebop
+ -->
+<launch>
+  <node name="cbf_node" pkg="cbf" type="cbf.py" output="screen"/>
+</launch>
