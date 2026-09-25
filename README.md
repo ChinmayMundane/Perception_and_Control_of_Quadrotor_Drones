@@ -57,6 +57,7 @@ sudo apt install -y \
   python3-pip \
   python3-rosdep \
   python3-scipy \
+  python3-pykdl \
   ros-noetic-gazebo-ros-pkgs \
   ros-noetic-hector-gazebo-plugins \
   ros-noetic-jackal-description \
@@ -109,7 +110,7 @@ Continue with the dependency installation and build steps below from
 Install Open3D for the CBF example:
 
 ```bash
-python3 -m pip install --user open3d==0.18.0
+python3 -m pip install --user open3d
 ```
 
 ```bash
