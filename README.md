@@ -110,7 +110,7 @@ Continue with the dependency installation and build steps below from
 Install Open3D for the CBF example:
 
 ```bash
-python3 -m pip install --user open3d
+python3 -m pip install --user open3d==0.18.0
 ```
 
 ```bash
