@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="namespace" default="bebop" />
+    <arg name="ip" default="192.168.42.1" />
+    <!-- <arg name="ip" default="192.168.1.100" /> -->
+    <arg name="drone_type" default="bebop1" /> <!-- available drone types: bebop1, bebop2 -->
+    <arg name="config_file" default="$(find bebop_driver)/config/defaults.yaml" />
+    <arg name="camera_info_url" default="package://bebop_driver/data/$(arg drone_type)_camera_calib.yaml" />
+    <group ns="$(arg namespace)">
+        <!-- nodelet manager -->
+        <node pkg="nodelet" type="nodelet" name="bebop_nodelet_manager" args="manager" output="screen"/>
+        <!-- bebop_nodelet -->
+        <node pkg="nodelet" type="nodelet" name="bebop_nodelet"
+          args="load bebop_driver/BebopDriverNodelet bebop_nodelet_manager">
+            <param name="camera_info_url" value="$(arg camera_info_url)" />
+            <param name="bebop_ip" value="$(arg ip)" />
+            <rosparam command="load" file="$(arg config_file)" />
+        </node>
+    </group>
+
+  <arg name="name" default="bebop_vel_ctrl_node"/> <!-- a hack to avoid namespaces -->
+  <arg name="param_file" default="$(find bebop_vel_ctrl)/config/bebop_vel_ctrl.yaml" />
+  <arg name="output" default="screen" />
+  <arg name="input_topic" default="velocity" />
+  <arg name="output_topic" default="cmd_vel" />
+  <arg name="debug_topic" default="vel_ctrl/debug" />
+
+  <arg name="plotxy" default="false" />
+  <arg name="plotz" default="false" />
+  <arg name="plotyaw" default="false" />
+<group ns="$(arg namespace)">
+  <node name="$(arg name)" type="bebop_vel_ctrl_node" pkg="bebop_vel_ctrl" output="$(arg output)" >
+    <remap from="setpoint/cmd_vel" to="$(arg input_topic)" />
+    <remap from="debug" to="$(arg debug_topic)" />
+    <rosparam command="load" file="$(arg param_file)" />
+  </node>
+</group>
+  <group if="$(arg plotxy)">
+    <node name="rqt_plot_x" type="rqt_plot" pkg="rqt_plot" output="log"
+      args="--clear-config /actual_bebop/cmd_vel/linear/x /vel_ctrl/debug/beb_vx_pred_m /vel_ctrl/debug/beb_vx_pred_delay_m /vel_ctrl/debug/beb_vx_m /vel_ctrl/debug/setpoint/linear/x" />
+    <node name="rqt_plot_y" type="rqt_plot" pkg="rqt_plot" output="log"
+      args="--clear-config /actual_bebop/cmd_vel/linear/y /vel_ctrl/debug/beb_vy_pred_m /vel_ctrl/debug/beb_vy_pred_delay_m /vel_ctrl/debug/beb_vy_m /vel_ctrl/debug/setpoint/linear/y" />
+  </group>
+  '
+  <group if="$(arg plotyaw)">
+    <node name="rqt_plot_yaw" type="rqt_plot" pkg="rqt_plot" output="log"
+      args="--clear-config /actual_bebop/cmd_vel/angular/z /vel_ctrl/debug/beb_yaw_rad /vel_ctrl/debug/setpoint_filt/angular/z" />
+  </group>
+
+  <group if="$(arg plotz)">
+    <node name="rqt_plot_z" type="rqt_plot" pkg="rqt_plot" output="log"
+      args="--clear-config /actual_bebop/cmd_vel/linear/z /vel_ctrl/debug/beb_alt_m /vel_ctrl/debug/beb_vz_enu /vel_ctrl/debug/setpoint_filt/linear/z" />
+  </group>
+
+</launch>

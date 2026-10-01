@@ -1,0 +1,7 @@
+<launch>
+  <!-- Start the PID controller node -->
+  <node pkg="your_controller" type="pid.py" name="pid_node" output="screen" />
+
+  <!-- Start RViz with the Bebop config -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find your_controller)/rviz/bebop.rviz" required="false" />
+</launch>
