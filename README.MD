@@ -77,22 +77,7 @@ rostopic pub /bebop/land std_msgs/Empty "{}"
 ### 4. **Control Bebop drone**
 **IMPORTANT:** For safety reasons, the velocity command given to the bebop should be clipped. The recommended value is 0.1 - 0.3. 
 
-4.1. Send direct control command to Bebop cmd topic
+Send direct control command to Bebop cmd topic
 ```bash
 rostopic pub -r 10 /bebop/velocity geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
-
-4.2. Control with PID controller in Python
-
-Your task today is to complete the TODOs in the file `your_controller/scripts/pid.py`. After finishing, run the launch file below to control the Bebop drone.
-
-Launch the controller node:
-```bash
-source devel/setup.bash
-roslaunch your_controller bebop_rviz_pid.launch
-```
-
-This launch file starts:
-- the PID node from `your_controller/scripts/pid.py`
-- RViz with the configuration file `your_controller/rviz/bebop.rviz`
-
