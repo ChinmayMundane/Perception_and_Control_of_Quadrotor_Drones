@@ -1,0 +1,11 @@
+<launch>
+ <!-- Launch file for Bebop with CBF controller and RViz -->
+ <!-- Set up circular obstacles -->
+  <node pkg="your_controller" type="setup_circular_obstacles.py" name="circular_obstacle_publisher" output="screen" />
+
+  <!-- Start the CBF controller node -->
+  <node pkg="your_controller" type="cbf.py" name="cbf_node" output="screen" />
+
+  <!-- Start RViz with the Bebop config -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find your_controller)/rviz/bebop.rviz" required="false" />
+</launch>

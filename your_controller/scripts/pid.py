@@ -15,13 +15,14 @@ from tf import transformations
 # -----------------------------
 # Parameters (keep all user-tunable values here)
 # -----------------------------
-# TODO (YOUR TASK): Set your desired goal position in the x-y plane.
-# Students should choose a target point for the Bebop to fly toward.
-# Example: a 2D target like [x_goal, y_goal].
-# You can inspect the current drone pose with:
+# Student task 1: choose your own goal in the horizontal plane.
+# The drone is already flying at a safe altitude after takeoff, so we only need to
+# control x and y motion here. The z-axis is not part of this PID task.
+# TODO: Change the 2D goal below to your own test location (in meters in the odom/world frame).
+# To inspect the current Bebop pose, run:
 #   rostopic echo /vrpn_client_node/bebop/pose
-# Keep z fixed by the takeoff/altitude logic; do not include it in the goal here.
-GOAL_POSITION = np.array([0.0, 0.0], dtype=float)
+# This prints the current position and orientation in ROS.
+GOAL_POSITION = np.array([3.0, -2.0], dtype=float)
 
 # DO NOT CHANGE below parameters unless you know what you are doing.
 MAX_SPEED = 0.15
@@ -61,55 +62,55 @@ land_pub = None
 
 
 def transform_to_bebop_frame(pose_msg, target_world_point):
-    """TODO (YOUR TASK): Convert the target point from the world frame to the Bebop body frame.
+    """TODO: Convert a target point from the world frame into the Bebop body frame.
 
-    Step-by-step hints:
-      1. Get the drone position from pose_msg.position.
-      2. Get the drone orientation quaternion from pose_msg.orientation.
-      3. Build the 3x3 rotation matrix from the quaternion.
-      4. Compute the relative vector in the world frame:
-             relative_world = target_world_point - drone_position
-      5. Rotate that vector into the drone body frame:
-             relative_body = R_body^T * relative_world
-      6. Return only the x and y components for 2D control.
+    Hints for students:
+      1. Read the drone position and yaw/orientation from pose_msg.
+      2. Compute the relative vector from the drone to the target in the world frame.
+      3. Use the drone rotation matrix to convert that vector into the drone body frame.
+      4. Keep only the x and y components because the drone is already flying at altitude.
 
-    Formula:
-      p_body = R_body^T * (p_goal_world - p_drone_world)
-
-    This makes the control commands depend on the drone's local frame, not the global frame.
+    The math is:
+      relative_world = target_world - drone_world
+      relative_body  = R_drone.T * relative_world
     """
-    # TODO: Write the code here.
-    # Hint: use transformations.quaternion_matrix(...) to get the rotation matrix.
-    # Hint: return the first two values from the transformed vector.
+    # Student task: implement the frame transform here.
+    # Replace the placeholder with the formula above.
+    # Hint: the final output should be a 2D vector [vx, vy] in the drone frame.
     return np.zeros(2, dtype=float)
 
 
 def pid_controller(error, dt, kp, ki, kd):
-    """TODO (YOUR TASK): Implement the 2D PID controller.
+    """TODO: Implement the 2D PID update law.
 
-    Step-by-step hints:
-      1. Keep track of the previous error value.
-      2. Update the integral term: integral_error += error * dt
-      3. Compute the derivative term: derivative_error = (error - last_error) / dt
-      4. Compute the control signal:
-             u = kp * error + ki * integral_error + kd * derivative_error
-      5. Return the resulting 2D velocity command.
+    Hints for students:
+      1. Use the current error e.
+      2. Accumulate the integral: integral += e * dt.
+      3. Compute the derivative: (e - previous_error) / dt.
+      4. Apply the classic PID law: u = kp * e + ki * integral + kd * derivative.
+      5. Store the previous error into "last_error" before returning the control output.
 
-    PID formula:
-      u = Kp * e + Ki * integral(e) dt + Kd * de/dt
-
-    Notes:
-      - error is the position error in the Bebop body frame.
-      - dt is the time step between pose updates.
-      - You may want to keep the integral and previous error in global variables.
+    The controller should output a 2D velocity command in the drone frame.
     """
     global last_error, integral_error
 
-    # TODO: 
-    # Update the integral term.
-    # Compute the derivative term.
-    # Update last_error.
-    # Return the final PID command.
+    # Student task: write the discrete PID controller here.
+    # Keep the error history in the global variables so the next control step can
+    # compare against the previous error value.
+    return np.zeros_like(error, dtype=float)
+
+
+def transform_body_velocity_to_world(pose_msg, velocity_body):
+    """TODO: Rotate a body-frame velocity into the world/odom frame for RViz.
+
+    Hints for students:
+      1. Build the drone rotation matrix from the quaternion in pose_msg.
+      2. Treat the commanded planar velocity as [vx, vy, 0] in the body frame.
+      3. Multiply by the rotation matrix to get the world-frame velocity.
+      4. Keep only the x and y components for the RViz arrow visualization.
+    """
+    # Student task: convert the body-frame velocity to world coordinates here.
+    # This only needs to return a 2D vector for plotting in RViz.
     return np.zeros(2, dtype=float)
 
 
@@ -259,10 +260,11 @@ def visualize_velocity_marker(drone_pos, velocity_cmd):
 
 
 def drone_pose_callback(msg):
-    """Receive drone pose and update the latest pose for control and landing checks.
+    """Receive pose updates and compute the next corrective velocity command.
 
-    This callback runs whenever a new pose message arrives. It is the main control loop
-    for the PID controller, because it computes the error and sends the next velocity.
+    This callback is the heart of the controller: it reads the current pose, computes
+    the position error relative to the goal, and sends a velocity command back to the drone.
+    The drone already has a safe altitude, so we only need to stabilize the horizontal plane.
     """
     global current_pose, last_error, integral_error, last_time, goal_reached, pid_active
 
@@ -271,14 +273,19 @@ def drone_pose_callback(msg):
     if not pid_active:
         return
 
+    # Current drone position in the world/odom frame.
     drone_pos = np.array([
         msg.pose.position.x,
         msg.pose.position.y,
         msg.pose.position.z,
     ], dtype=float)
 
+    # Convert the goal into the drone body frame so the controller can react to the
+    # target relative to the drone's current orientation.
     error_body = transform_to_bebop_frame(msg.pose, GOAL_POSITION)
 
+    # Estimate the elapsed time between pose messages. The PID controller uses this to
+    # update the integral and derivative terms correctly.
     now = rospy.Time.now().to_sec()
     if last_time is None:
         dt = 0.02
@@ -286,8 +293,10 @@ def drone_pose_callback(msg):
         dt = max(now - last_time, 1e-3)
     last_time = now
 
+    # Compute the planar velocity command in the drone body frame.
     control_body = pid_controller(error_body, dt, KP, KI, KD)
 
+    # Saturate the command so the drone does not exceed the safe maximum speed.
     norm = np.linalg.norm(control_body)
     if norm > MAX_SPEED:
         control_body = control_body / norm * MAX_SPEED
@@ -301,10 +310,13 @@ def drone_pose_callback(msg):
     twist_msg.angular.z = 0.0
     velocity_pub.publish(twist_msg)
 
+    # Plot the commanded velocity in the world frame for debugging in RViz.
+    velocity_world = transform_body_velocity_to_world(msg.pose, control_body)
     visualize_drone_pose(drone_pos)
-    visualize_velocity_marker(drone_pos, control_body)
+    visualize_velocity_marker(drone_pos, velocity_world)
 
-    distance = np.linalg.norm(drone_pos[:2] - GOAL_POSITION)
+    # Stop the controller once the drone reaches the target in the horizontal plane.
+    distance = np.linalg.norm(drone_pos[:2] - GOAL_POSITION[:2])
     if distance < GOAL_THRESHOLD:
         goal_reached = True
         pid_active = False
@@ -372,6 +384,9 @@ def main():
 
     rospy.init_node('pid_node', anonymous=False)
 
+    # ROS publishers used by the controller and visualization tools.
+    # The drone command is sent to /bebop/velocity, while RViz markers show the goal,
+    # current pose, and the commanded velocity arrow.
     velocity_pub = rospy.Publisher('/bebop/velocity', Twist, queue_size=2)
     velocity_viz_pub = rospy.Publisher('/control_velocity_viz', Marker, queue_size=2)
     goal_viz_pub = rospy.Publisher('/goal_viz', Marker, queue_size=2)
@@ -379,6 +394,7 @@ def main():
     takeoff_pub = rospy.Publisher('/bebop/takeoff', Empty, queue_size=2)
     land_pub = rospy.Publisher('/bebop/land', Empty, queue_size=2)
 
+    # Subscribe to the drone pose estimate from the VRPN system.
     rospy.Subscriber('/vrpn_client_node/bebop/pose', PoseStamped, drone_pose_callback, queue_size=1)
 
     print("Keyboard control")
@@ -389,7 +405,7 @@ def main():
     rate = rospy.Rate(PUBLISH_RATE_HZ)
 
     while not rospy.is_shutdown():
-        visualize_goal_marker(np.array([GOAL_POSITION[0], GOAL_POSITION[1], 1.0]))
+        visualize_goal_marker(GOAL_POSITION, z=1.0)
 
         key = read_single_key(timeout=0.1)
         if key is None:
