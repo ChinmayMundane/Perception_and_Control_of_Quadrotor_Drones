@@ -82,7 +82,7 @@ Send direct control command to Bebop cmd topic
 rostopic pub -r 10 /bebop/velocity geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
 ```
 
-## 3. Student tasks
+## 3. Student Tasks
 
 Complete the TODOs in these files for correspoding task (PID or CBF):
 - PID: `your_controller/scripts/pid.py`
