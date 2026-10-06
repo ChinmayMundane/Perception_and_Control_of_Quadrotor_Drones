@@ -16,12 +16,11 @@ from tf import transformations
 # Parameters (keep all user-tunable values here)
 # -----------------------------
 # Student task 1: choose your own goal in the horizontal plane.
-# The drone is already flying at a safe altitude after takeoff, so we only need to
-# control x and y motion here. The z-axis is not part of this PID task.
-# TODO: Change the 2D goal below to your own test location (in meters in the odom/world frame).
-# To inspect the current Bebop pose, run:
-#   rostopic echo /vrpn_client_node/bebop/pose
-# This prints the current position and orientation in ROS.
+# The drone is already climbing to a safe altitude after takeoff, so this PID example
+# only needs to control x and y motion. The z-axis is not part of the assignment.
+# TODO: Replace the default goal with your own 2D target in the odom/world frame.
+# Example: GOAL_POSITION = np.array([1.5, -1.0], dtype=float)
+# Hint: choose a point that is reachable, within the range of mocap and easy to observe in RViz.
 GOAL_POSITION = np.array([3.0, -2.0], dtype=float)
 
 # DO NOT CHANGE below parameters unless you know what you are doing.
