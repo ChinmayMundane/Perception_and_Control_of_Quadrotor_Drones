@@ -46,10 +46,10 @@ PUBLISH_RATE_HZ = 5.0
 #   - ALPHA: control strength of the barrier constraint
 #   - K_ATT: how strongly the controller moves toward the goal
 #   - K_NEAR_OBSTACLES: how many closest obstacle points to keep for the QP to reduce solve time
-D_OBS = 0.25
-ALPHA = 0.1
-K_ATT = 1.0
-K_NEAR_OBSTACLES = 50
+D_OBS = ...  # safety margin (meters) in the barrier function h (h = || x - x_obs ||**2 - D_OBS**2)
+ALPHA = ...  # alpha in CBF constraint: dh/dt + alpha * h >= 0
+K_ATT = ...  # attraction gain toward the goal for goal-seeking velocity (v_des = K_ATT * (x_goal - x_drone))
+K_NEAR_OBSTACLES = ...  # number of closest obstacle points to keep for the QP to reduce solve time
 
 # DO NOT change the following global variables unless you are debugging the code.
 latest_obstacle_cloud = None
