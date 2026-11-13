@@ -1,0 +1,64 @@
+<launch>
+  <arg name="device" default="auto"/>
+  <arg name="model_path" default="$(find bebop_depth_estimation)/models/metric_indoor"/>
+  <arg name="image_topic" default="/bebop/image_raw"/>
+  <arg name="camera_info_topic" default="/bebop/camera_info"/>
+  <arg name="compressed" default="false"/>
+  <arg name="image_rectified" default="false"/>
+  <arg name="target_frame" default="base_link"/>
+  <arg name="cloud_topic" default="/bebop/depth/points"/>
+  <arg name="publish_2d" default="true"/>
+  <arg name="body_frame" default="base_link"/>
+  <arg name="planar_frame" default="base_link"/>
+  <arg name="planar_topic" default="/bebop/depth/points_2d"/>
+  <arg name="slice_min_height" default="-0.25"/>
+  <arg name="slice_max_height" default="0.25"/>
+  <arg name="angle_bin_degrees" default="1.0"/>
+  <arg name="max_planar_points" default="720"/>
+  <arg name="depth_topic" default="/bebop/depth/image"/>
+  <arg name="input_size" default="518"/>
+  <arg name="num_threads" default="4"/>
+  <arg name="max_rate" default="5.0"/>
+  <arg name="max_age" default="1.0"/>
+  <arg name="tf_timeout" default="0.05"/>
+  <arg name="pixel_stride" default="4"/>
+  <arg name="max_points" default="2000"/>
+  <arg name="min_depth" default="0.1"/>
+  <arg name="max_depth" default="10.0"/>
+  <arg name="depth_scale" default="1.0"/>
+  <arg name="depth_offset" default="0.0"/>
+  <!-- Optional virtualenv interpreter, e.g. /path/to/venv/bin/python.
+       Catkin scripts otherwise use the Python chosen when building. -->
+  <arg name="python" default=""/>
+  <node pkg="bebop_depth_estimation" type="depth_to_cloud.py" name="bebop_depth_estimation"
+        output="screen" required="true" launch-prefix="$(arg python)">
+    <param name="device" value="$(arg device)"/>
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="camera_info_topic" value="$(arg camera_info_topic)"/>
+    <param name="compressed" value="$(arg compressed)"/>
+    <param name="image_rectified" value="$(arg image_rectified)"/>
+    <param name="target_frame" value="$(arg target_frame)"/>
+    <param name="cloud_topic" value="$(arg cloud_topic)"/>
+    <param name="publish_2d" value="$(arg publish_2d)"/>
+    <param name="body_frame" value="$(arg body_frame)"/>
+    <param name="planar_frame" value="$(arg planar_frame)"/>
+    <param name="planar_topic" value="$(arg planar_topic)"/>
+    <param name="slice_min_height" value="$(arg slice_min_height)"/>
+    <param name="slice_max_height" value="$(arg slice_max_height)"/>
+    <param name="angle_bin_degrees" value="$(arg angle_bin_degrees)"/>
+    <param name="max_planar_points" value="$(arg max_planar_points)"/>
+    <param name="depth_topic" value="$(arg depth_topic)"/>
+    <param name="input_size" value="$(arg input_size)"/>
+    <param name="num_threads" value="$(arg num_threads)"/>
+    <param name="max_rate" value="$(arg max_rate)"/>
+    <param name="max_age" value="$(arg max_age)"/>
+    <param name="tf_timeout" value="$(arg tf_timeout)"/>
+    <param name="pixel_stride" value="$(arg pixel_stride)"/>
+    <param name="max_points" value="$(arg max_points)"/>
+    <param name="min_depth" value="$(arg min_depth)"/>
+    <param name="max_depth" value="$(arg max_depth)"/>
+    <param name="depth_scale" value="$(arg depth_scale)"/>
+    <param name="depth_offset" value="$(arg depth_offset)"/>
+  </node>
+</launch>

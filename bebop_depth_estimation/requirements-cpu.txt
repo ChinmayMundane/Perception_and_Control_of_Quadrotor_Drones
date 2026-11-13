@@ -1,0 +1,2 @@
+# Compatibility filename; shared dependencies for CPU and CUDA.
+-r requirements.txt

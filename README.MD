@@ -105,3 +105,7 @@ roslaunch your_controller bebop_rviz_cbf.launch
 ```
 
 Keep it simple: finish the TODOs in the file, then launch the matching launch file.
+
+## 4. Camera depth and 2D obstacle point cloud
+
+For setup and run instructions, see the [depth estimation README](bebop_depth_estimation/README.md).

@@ -1,0 +1,21 @@
+<launch>
+  <!-- Perception only. The user starts this launch manually; no flight commands. -->
+  <arg name="device" default="auto"/>
+  <arg name="publish_camera_tf" default="true"/>
+  <arg name="planar_frame" default="base_link"/>
+  <arg name="planar_topic" default="/bebop/depth/points_2d"/>
+  <arg name="python" default=""/>
+  <!-- Live gimbal states arrive at roughly 5 Hz; allow the next TF sample. -->
+  <arg name="tf_timeout" default="0.3"/>
+  <!-- Use the real Bebop URDF and live gimbal joints, including the camera offset.
+       Set publish_camera_tf:=false if another robot_state_publisher already does this. -->
+  <group if="$(arg publish_camera_tf)" ns="depth_camera_model">
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find bebop_description)/urdf/bebop_base.urdf.xacro"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+          name="state_publisher" output="screen">
+      <remap from="joint_states" to="/bebop/joint_states"/>
+    </node>
+  </group>
+  <include file="$(find bebop_depth_estimation)/launch/depth.launch" pass_all_args="true"/>
+</launch>

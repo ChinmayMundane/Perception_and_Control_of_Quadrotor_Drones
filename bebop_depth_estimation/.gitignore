@@ -1,0 +1,15 @@
+# Include the supplied indoor checkpoint; ignore other models and caches.
+models/*
+!models/metric_indoor/
+models/metric_indoor/*
+!models/metric_indoor/config.json
+!models/metric_indoor/preprocessor_config.json
+!models/metric_indoor/model.safetensors
+!models/metric_indoor/source.json
+!models/metric_indoor/README.md
+!models/metric_indoor/LICENSE*
+!models/metric_indoor/NOTICE*
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc

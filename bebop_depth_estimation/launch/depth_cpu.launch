@@ -1,0 +1,5 @@
+<launch>
+  <!-- Compatibility launcher: retain CPU default for previous teaching commands. -->
+  <arg name="device" default="cpu"/>
+  <include file="$(find bebop_depth_estimation)/launch/depth.launch" pass_all_args="true"/>
+</launch>

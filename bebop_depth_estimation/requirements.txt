@@ -1,0 +1,7 @@
+# Install CPU or CUDA torch separately using the commands in README.md.
+# These versions support ROS Noetic's Python 3.8. Keep NumPy <2 for cv_bridge.
+numpy==1.24.4
+Pillow==10.4.0
+transformers==4.46.3
+huggingface-hub==0.26.5
+safetensors==0.5.3
