@@ -1,0 +1,4 @@
+*.bag
+*.bag.active
+*.npz
+__pycache__/

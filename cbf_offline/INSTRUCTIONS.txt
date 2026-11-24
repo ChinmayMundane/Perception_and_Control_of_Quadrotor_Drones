@@ -1,0 +1,33 @@
+CBF offline exercise
+
+Use ROS Noetic with Python 3, NumPy and cv_bridge.
+
+0. Download the recording
+link: https://owncloud.ut.ee/owncloud/s/mzrF2eSDTjtXsLP
+Download the rosbag and place it in any folder for eg, cbf_offline package
+
+1. Explore the recording(if you want to check the topics and data stream)
+
+With a ROS master running, use:
+  rosbag play --clock --loop ~/src/cbf_offline/cbf.bag
+
+Inspect topics from another terminal:
+  rostopic list
+  rostopic info /bebop/image_raw
+  rostopic info /bebop/camera_info
+
+2. Extract a snapshot directly from the bag
+
+run:
+  cd bebop_drone_ws/src/cbf_offline
+  source /opt/ros/noetic/setup.bash
+  python3 extract_data.py cbf.bag --time 11.5 --output data1.npz
+
+Change --time to any offset in seconds from the bag start. Choose a new output
+filename each time. The extractor reads the file directly: no bag playback,
+ROS master, live subscriber or waiting for the requested instant is needed.
+
+
+The NPZ also contains timestamps, available odometry/joint arrays, and the other
+selected topics. metadata["topics"] maps each topic to its raw-data/YAML keys
+and records its time difference from the image.

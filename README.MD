@@ -109,3 +109,7 @@ Keep it simple: finish the TODOs in the file, then launch the matching launch fi
 ## 4. Camera depth and 2D obstacle point cloud
 
 For setup and run instructions, see the [depth estimation README](bebop_depth_estimation/README.md).
+
+## 5. CBF rosbag snapshots
+
+For extracting snapshot data from a rosbag, see the [snapshot extraction instructions](cbf_snapshot_extractor/INSTRUCTIONS.txt).
