@@ -110,6 +110,6 @@ Keep it simple: finish the TODOs in the file, then launch the matching launch fi
 
 For setup and run instructions, see the [depth estimation README](bebop_depth_estimation/README.md).
 
-## 5. CBF rosbag snapshots
+## 5. CBF offline exercise
 
-For extracting snapshot data from a rosbag, see the [snapshot extraction instructions](cbf_snapshot_extractor/INSTRUCTIONS.txt).
+For extracting data from a rosbag, see the [CBF offline README](cbf_offline/README.md).

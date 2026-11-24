@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract a time-aligned ROS1 bag snapshot without starting ROS playback.
 
-Example: python3 extract_snapshot.py cbf.bag --time 11.5 --output snapshot_11_5s.npz
+Example: python3 extract_data.py cbf.bag --time 11.5 --output data1.npz
 Time is seconds from the bag start. Messages are aligned using their recorded
 timestamps. No ROS master, subscriptions, playback, or /clock is used.
 """
