@@ -35,3 +35,6 @@ python3 extract_data.py cbf.bag --time 11.5 --output data1.npz
 Change `--time` to any offset in seconds from the bag start. Choose a new output filename each time. Extraction reads the bag directly; playback and a ROS master are not required.
 
 The NPZ contains the RGB image, camera calibration, timestamps, available odometry/joint arrays, and other selected topics. `snapshot_metadata_json` contains metadata whose `topics` field maps each topic to its raw-data/YAML keys and records its time difference from the image.
+
+
+Your task is to extract the information using given script (specifically, images at any time instant).then do depth estimation, plot the point cloud from depth estimation in rviz and show how the cbf velocity looks at those specific instants.
